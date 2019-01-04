@@ -22,8 +22,24 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/tasks', taskRouter);
 
+const allowedExt = [
+  '.js',
+  '.ico',
+  '.css',
+  '.png',
+  '.jpg',
+  '.woff2',
+  '.woff',
+  '.ttf',
+  '.svg',
+];
+
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/dist/todo/index.html'));
+  if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
+    res.sendFile(path.resolve(`public/dist/todo/${req.url}`));
+  } else {
+    res.sendFile(path.resolve('public/dist/todo/index.html'));
+  }
 });
 
 module.exports = app;
