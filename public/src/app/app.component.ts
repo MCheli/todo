@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TasksService } from './tasks.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +10,18 @@ import { TasksService } from './tasks.service';
 export class AppComponent implements OnInit {
   constructor(private taskService: TasksService) { }
 
-  title = null;
+  text = '';
+  tasks: Observable<Array<any>>;
 
   ngOnInit() {
     this.taskService.getTasks().subscribe(resp => {
-      // display its headers
-      console.log(resp);
-      this.title = resp.info;
+      this.tasks = resp;
+    });
+  }
+
+  createTask(text) {
+    this.taskService.createTask(this.text).subscribe(resp => {
+      this.tasks = resp;
     });
   }
 }

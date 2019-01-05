@@ -10,7 +10,7 @@ router.post('/task', function(req, res, next) {
   newTask.id = tasks.length + 1;
   newTask.order = tasks.length + 1;
   tasks.push(newTask); //TODO: Replace with persistent storage
-  res.status(200).json(newTask);
+  res.status(200).json(tasks);
 })
 
 //Retrieve a list of all tasks
