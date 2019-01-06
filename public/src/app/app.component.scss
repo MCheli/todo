@@ -1,3 +1,9 @@
+.title-center {
+  margin: 0 auto;
+  font-family: 'Bungee', cursive;
+  font-size: 20pt;
+}
+
 .example-list {
   width: 500px;
   max-width: 100%;
@@ -20,6 +26,10 @@
   box-sizing: border-box;
   background: white;
   font-size: 14px;
+}
+
+.text-box {
+  align-items: left;
 }
 
 .cdk-drag-preview {

@@ -51,7 +51,7 @@ router.put('/task/:id', function(req, res, next){
       tasks[i] = updateTask;
     }
   })//TODO: O(n^2) FTW.
-  res.status(200).json(updateTask);
+  res.status(200).json(tasks);
 })
 
 //Delete individual task

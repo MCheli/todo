@@ -17,7 +17,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.taskService.getTasks().subscribe(resp => {
-      console.log(resp);
       this.tasks = resp;
     });
   }
@@ -41,6 +40,13 @@ export class AppComponent implements OnInit {
 
   deleteTask(task) {
     this.taskService.deleteTask(task).subscribe(resp => {
+      this.tasks = resp;
+    });
+  }
+
+  updateTask(value, task) {
+    task.text = value;
+    this.taskService.updateTask(task).subscribe(resp => {
       this.tasks = resp;
     });
   }

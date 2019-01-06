@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 import { MatButtonModule, MatIconModule, MatListModule } from '@angular/material';
-import {DemoMaterialModule} from './material-module';
+import { DemoMaterialModule } from './material-module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
