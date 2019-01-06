@@ -4,6 +4,21 @@
   font-size: 20pt;
 }
 
+.center-content {
+  max-width: 500px;
+  margin: auto;
+}
+
+.new-task-input{
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.new-task-input > * {
+  width: 100%;
+}
+
 .example-list {
   width: 500px;
   max-width: 100%;
@@ -13,6 +28,10 @@
   background: white;
   border-radius: 4px;
   overflow: hidden;
+}
+
+.material-icons {
+  color: rgba(0, 0, 0, 0.5)
 }
 
 .example-box {
@@ -30,6 +49,7 @@
 
 .text-box {
   align-items: left;
+  width: 400px;
 }
 
 .cdk-drag-preview {

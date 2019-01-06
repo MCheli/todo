@@ -35,6 +35,7 @@ export class AppComponent implements OnInit {
   createTask(text) {
     this.taskService.createTask(this.text).subscribe(resp => {
       this.tasks = resp;
+      this.text = '';
     });
   }
 
