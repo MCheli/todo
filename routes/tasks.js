@@ -16,6 +16,7 @@ router.post('/task', function(req, res, next) {
 //Retrieve a list of all tasks
 router.get('/tasks', function(req, res, next){
   console.log("All Tasks: " + JSON.stringify(tasks));
+  tasks.sort(sortByOrder);
   res.status(200).json(tasks);
 })
 
@@ -30,6 +31,7 @@ router.put('/tasks', function(req, res, next){
       }
     })//TODO: O(n^2) FTW.
   });
+  tasks.sort(sortByOrder);
   res.status(200).json(tasks);
 })
 
@@ -64,5 +66,9 @@ router.delete('/task/:id', function(req, res, next){
   tasks = filtered;
   res.status(200).json(tasks);
 })
+
+var sortByOrder = function(a,b) {
+  return a.order - b.order;
+}
 
 module.exports = router;

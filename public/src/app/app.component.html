@@ -12,9 +12,9 @@
     </mat-form-field>
   </div>
 
-  <div cdkDropList [cdkDropListData]="tasks" class="example-list" (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let task of tasks" cdkDrag>
-      <div class="example-handle" cdkDragHandle>
+  <div cdkDropList [cdkDropListData]="tasks" class="task-list" (cdkDropListDropped)="drop($event)" *ngIf="tasks !== undefined && tasks.length > 0">
+    <div class="task-box" *ngFor="let task of tasks" cdkDragLockAxis="y" cdkDragBoundary=".task-list" cdkDrag>
+      <div cdkDragHandle>
         <i class="material-icons" style="cursor: move;">
           drag_handle
         </i>
