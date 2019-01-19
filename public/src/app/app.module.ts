@@ -12,6 +12,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { CountdownTimerModule } from 'ngx-countdown-timer';
+
+
 @NgModule({
   declarations: [
     AppComponent
@@ -25,7 +28,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatButtonModule,
     MatIconModule,
     MatListModule,
-    DemoMaterialModule
+    DemoMaterialModule,
+    CountdownTimerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

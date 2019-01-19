@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { TasksService } from './tasks.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
+export enum KEY_CODE {
+  RIGHT_ARROW = 39,
+  LEFT_ARROW = 37
+}
 
 @Component({
   selector: 'app-root',
@@ -14,11 +18,29 @@ export class AppComponent implements OnInit {
   text = '';
   tasks: Array<any>;
   selectedOptions = [];
+  selectedTab = 0;
 
   ngOnInit() {
     this.taskService.getTasks().subscribe(resp => {
       this.tasks = resp;
     });
+
+
+  }
+
+  @HostListener('window:keyup', ['$event'])
+  keyEvent(event: KeyboardEvent) {    
+    if (event.keyCode === KEY_CODE.RIGHT_ARROW) {
+      if(this.selectedTab < 3){
+        this.selectedTab++;
+      }
+    }
+
+    if (event.keyCode === KEY_CODE.LEFT_ARROW) {
+      if(this.selectedTab > 0){
+        this.selectedTab--;
+      }
+    }
   }
 
   drop(event: CdkDragDrop<string[]>) {
