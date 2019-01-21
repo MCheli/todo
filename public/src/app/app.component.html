@@ -5,55 +5,12 @@
   </mat-toolbar-row>
 </mat-toolbar>
 <mat-tab-group mat-align-tabs="center" [selectedIndex]="selectedTab">
-  <mat-tab label="Focus">
-    <div class="center-content">
 
-      <p>Focus Mark.</p>
-      <p><countdown-timer [end]="'2019-1-19 00:00:00'"></countdown-timer></p>
-    
-      <div cdkDropList [cdkDropListData]="tasks" class="task-list" (cdkDropListDropped)="drop($event)" *ngIf="tasks !== undefined && tasks.length > 0">
-        <div class="task-box" *ngFor="let task of tasks" cdkDragLockAxis="y" cdkDragBoundary=".task-list" cdkDrag>
-          <div cdkDragHandle>
-            <i class="material-icons" style="cursor: move;">
-              drag_handle
-            </i>
-          </div>
-          <span class="text-box">
-            <input #box matInput value="{{task.text}}" (keyup.enter)="updateTask(box.value, task)">
-          </span>
-          <mat-checkbox (click)="deleteTask(task)"></mat-checkbox>
-        </div>
-      </div>
-  </div>
-</mat-tab>
-<mat-tab label="Tasks">
-  <div class="center-content">
-    <div class="new-task-input">
-      <mat-form-field>
-        <input matInput placeholder="What needs to be done?" [(ngModel)]="text" (keyup.enter)="createTask(text)">
-      </mat-form-field>
-    </div>
-  
-    <div cdkDropList [cdkDropListData]="tasks" class="task-list" (cdkDropListDropped)="drop($event)" *ngIf="tasks !== undefined && tasks.length > 0">
-      <div class="task-box" *ngFor="let task of tasks" cdkDragLockAxis="y" cdkDragBoundary=".task-list" cdkDrag>
-        <div cdkDragHandle>
-          <i class="material-icons" style="cursor: move;">
-            drag_handle
-          </i>
-        </div>
-        <span class="text-box">
-          <input #box matInput value="{{task.text}}" (keyup.enter)="updateTask(box.value, task)">
-        </span>
-        <mat-checkbox (click)="deleteTask(task)"></mat-checkbox>
-      </div>
-    </div>
-  </div>
-</mat-tab>
-<mat-tab label="Priorities">
-  <div class="center-content">
+  <mat-tab label="Tasks">
+    <div class="center-content">
       <div class="new-task-input">
         <mat-form-field>
-          <input matInput placeholder="What is most important?" [(ngModel)]="text" (keyup.enter)="createTask(text)">
+          <input matInput placeholder="What needs to be done?" [(ngModel)]="text" (keyup.enter)="createTask(text)">
         </mat-form-field>
       </div>
     
@@ -67,12 +24,66 @@
           <span class="text-box">
             <input #box matInput value="{{task.text}}" (keyup.enter)="updateTask(box.value, task)">
           </span>
+          <i class="material-icons" (click)="toggleSensitive(task)" style="cursor: pointer;">
+            <span *ngIf="task.sensitive">lock</span>
+            <span *ngIf="!task.sensitive">lock_open</span>
+          </i>
+          <i class="material-icons" (click)="toggleFocus(task)" style="cursor: pointer;">
+            <span *ngIf="task.focus">visibility_off</span>
+            <span *ngIf="!task.focus">visibility</span>
+          </i>
           <mat-checkbox (click)="deleteTask(task)"></mat-checkbox>
         </div>
       </div>
-    
     </div>
   </mat-tab>
+  <mat-tab label="Priorities">
+    <div class="center-content">
+        <div class="new-task-input">
+          <mat-form-field>
+            <input matInput placeholder="What is most important?" [(ngModel)]="text" (keyup.enter)="createTask(text)">
+          </mat-form-field>
+        </div>
+      
+        <div cdkDropList [cdkDropListData]="tasks" class="task-list" (cdkDropListDropped)="drop($event)" *ngIf="tasks !== undefined && tasks.length > 0">
+          <div class="task-box" *ngFor="let task of tasks" cdkDragLockAxis="y" cdkDragBoundary=".task-list" cdkDrag>
+            <div cdkDragHandle>
+              <i class="material-icons" style="cursor: move;">
+                drag_handle
+              </i>
+            </div>
+            <span class="text-box">
+              <input #box matInput value="{{task.text}}" (keyup.enter)="updateTask(box.value, task)">
+            </span>
+            <i class="material-icons" style="cursor: pointer;" (click)="deleteTask(task)">
+                delete
+              </i>
+          </div>
+        </div>
+      
+      </div>
+  </mat-tab>
+  <mat-tab label="Focus">
+      <div class="center-content">
+  
+        <p>Focus Mark.</p>      
+        {{clock}}
+        <div cdkDropList [cdkDropListData]="tasks" class="task-list" *ngIf="tasks !== undefined && tasks.length > 0">
+          <div *ngFor="let task of tasks" >
+            <div class="task-box" *ngIf="task.focus">
+              <span class="text-box">
+                <input #box matInput value="{{task.text}}" (keyup.enter)="updateTask(box.value, task)">
+              </span>
+              <mat-checkbox (click)="deleteTask(task)"></mat-checkbox>
+            </div>
+          </div>
+      </div>
+    </div>
+    </mat-tab>
 </mat-tab-group>
 
 <router-outlet></router-outlet>
+
+<i class="material-icons" (click)="openBottomSheet()" style="cursor: pointer; position: fixed; right: 0; bottom: 0;">
+  settings
+</i>

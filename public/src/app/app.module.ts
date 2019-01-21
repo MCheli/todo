@@ -9,15 +9,16 @@ import { MatButtonModule, MatIconModule, MatListModule } from '@angular/material
 import { DemoMaterialModule } from './material-module';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { AppComponent, BottomSheetOverviewExampleSheet } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { CountdownTimerModule } from 'ngx-countdown-timer';
+// import { CountdownTimerModule } from 'ngx-countdown-timer';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BottomSheetOverviewExampleSheet
   ],
   imports: [
     BrowserModule,
@@ -28,8 +29,10 @@ import { CountdownTimerModule } from 'ngx-countdown-timer';
     MatButtonModule,
     MatIconModule,
     MatListModule,
-    DemoMaterialModule,
-    CountdownTimerModule
+    DemoMaterialModule
+    ],
+  entryComponents: [
+    BottomSheetOverviewExampleSheet
   ],
   providers: [],
   bootstrap: [AppComponent]

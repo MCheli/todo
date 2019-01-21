@@ -25,7 +25,12 @@ export class TasksService {
 
   // Create new task
   createTask(text): Observable<any> {
-    const body = {'text': text};
+    const body = {
+      'text': text,
+      'sensitive': false,
+      'life': 'professional'
+    }
+      ;
     return this.http.post('/api/task', body);
   }
 

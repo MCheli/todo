@@ -1,6 +1,8 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { TasksService } from './tasks.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
+import * as moment from 'moment';
 
 export enum KEY_CODE {
   RIGHT_ARROW = 39,
@@ -13,18 +15,31 @@ export enum KEY_CODE {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor(private taskService: TasksService) { }
+  constructor(private taskService: TasksService,
+    private bottomSheet: MatBottomSheet) { }
 
   text = '';
   tasks: Array<any>;
   selectedOptions = [];
   selectedTab = 0;
+  personal = false;
+  public = false;
+  clock;
 
   ngOnInit() {
     this.taskService.getTasks().subscribe(resp => {
-      this.tasks = resp;
+      this.tasks = this.filterTasks(resp);
     });
 
+        // Runs the enclosed function on a set interval.
+        setInterval(() => {
+          this.clock = moment().format('h:mm:ss:SS a');
+      }, 10) // Updates the time every second.
+  }
+
+  filterTasks(tasks){
+    var taskList = tasks.filter(task => (!task.sensitive || !JSON.parse(localStorage.getItem("public"))));
+    return taskList;
 
   }
 
@@ -53,6 +68,14 @@ export class AppComponent implements OnInit {
     this.taskService.updateTasks(this.tasks).subscribe(resp => {
       this.tasks = resp;
     });
+
+    console.log(this.bottomSheet)
+  }
+
+  getTasks(){
+    this.taskService.getTasks().subscribe(resp => {
+      this.tasks = this.filterTasks(resp);
+    });
   }
 
   createTask(text) {
@@ -67,6 +90,20 @@ export class AppComponent implements OnInit {
       this.tasks = resp;
     });
   }
+  
+  toggleFocus(task){
+    task.focus = (task.focus) ? false : true;
+    this.taskService.updateTask(task).subscribe(resp => {
+      this.tasks = resp;
+    });
+  }
+
+  toggleSensitive(task){
+    task.sensitive = (task.sensitive) ? false : true;
+    this.taskService.updateTask(task).subscribe(resp => {
+      this.tasks = resp;
+    });
+  }
 
   updateTask(value, task) {
     task.text = value;
@@ -74,4 +111,37 @@ export class AppComponent implements OnInit {
       this.tasks = resp;
     });
   }
+
+  openBottomSheet(): void {
+    this.bottomSheet.open(BottomSheetOverviewExampleSheet);
+  }
+
+  
+}
+
+@Component({
+  selector: 'bottom-sheet-overview-example-sheet',
+  templateUrl: 'app.settings.component.html',
+})
+export class BottomSheetOverviewExampleSheet {
+  constructor(private bottomSheetRef: MatBottomSheetRef<BottomSheetOverviewExampleSheet>,
+    private taskService: TasksService) {}
+
+
+  ngOnInit() {
+    var storedPublic = localStorage.getItem("public");
+    var storedPersonal = localStorage.getItem("personal");
+
+    this.public = (storedPublic != "undefined") ? JSON.parse(storedPublic) : false;
+    this.personal = (storedPersonal != "undefined") ? JSON.parse(storedPersonal) : false;
+  }
+
+  personal;
+  public;
+
+  onChange(){
+    localStorage.setItem('public', this.public);
+    localStorage.setItem('personal', this.personal);
+  }
+
 }
