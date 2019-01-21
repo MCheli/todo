@@ -24,13 +24,13 @@
           <span class="text-box">
             <input #box matInput value="{{task.text}}" (keyup.enter)="updateTask(box.value, task)">
           </span>
-          <i class="material-icons" (click)="toggleSensitive(task)" style="cursor: pointer;">
-            <span *ngIf="task.sensitive">lock</span>
-            <span *ngIf="!task.sensitive">lock_open</span>
+          <i class="material-icons task-icons" (click)="toggleSensitive(task)" style="cursor: pointer;">
+            <span *ngIf="task.sensitive" matTooltip="Make task non-sensitive">lock_open</span>
+            <span *ngIf="!task.sensitive" matTooltip="Make task sensitive">lock</span>
           </i>
-          <i class="material-icons" (click)="toggleFocus(task)" style="cursor: pointer;">
-            <span *ngIf="task.focus">visibility_off</span>
-            <span *ngIf="!task.focus">visibility</span>
+          <i class="material-icons task-icons" (click)="toggleFocus(task)" style="cursor: pointer;">
+            <span *ngIf="task.focus" matTooltip="Remove focus">visibility_off</span>
+            <span *ngIf="!task.focus" matTooltip="Focus task">visibility</span>
           </i>
           <mat-checkbox (click)="deleteTask(task)"></mat-checkbox>
         </div>

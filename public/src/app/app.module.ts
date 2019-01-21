@@ -5,14 +5,11 @@ import { FormsModule } from '@angular/forms';
 
 import { NgModule } from '@angular/core';
 
-import { MatButtonModule, MatIconModule, MatListModule } from '@angular/material';
-import { DemoMaterialModule } from './material-module';
+import { MaterialModule } from './material-module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent, BottomSheetOverviewExampleSheet } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-// import { CountdownTimerModule } from 'ngx-countdown-timer';
 
 
 @NgModule({
@@ -26,10 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatIconModule,
-    MatListModule,
-    DemoMaterialModule
+    MaterialModule
     ],
   entryComponents: [
     BottomSheetOverviewExampleSheet

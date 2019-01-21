@@ -78,3 +78,12 @@
   min-height: 60px;
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
+
+.task-box:hover .task-icons {
+  display: inline-block;
+}
+
+.task-icons {
+  display: none;
+  margin-left: 4px;
+}
