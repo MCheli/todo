@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "docker-install":"docker build -t todo:1.0.0 -f docker/Dockerfile .",
+    "docker-run":"docker run -it --rm todo:1.0.0"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
