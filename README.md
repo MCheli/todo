@@ -1,25 +1,22 @@
-# todo - Marks task management app
+# todo
 
-## API Endpoints
+> Marks task management application
 
-Documentation:  https://documenter.getpostman.com/view/478773/RznCsfqV
+## Build Setup
 
-/api/task
-- POST - Create a new task
+``` bash
+# install dependencies
+$ npm run install
 
-/api/tasks
-- GET - Retrieve a list of all tasks
-- PUT - Update all tasks in given list
+# serve with hot reload at localhost:3000
+$ npm run dev
 
-/api/task/[TaskID]
-- GET - Retrieve individual task
-- PUT - Update an individual tasks
-- DELETE - Deletes an individual task
+# build for production and launch server
+$ npm run build
+$ npm run start
 
-## Entities
+# generate static project
+$ npm run generate
+```
 
-### Task
-
-- id - unique id associated associated with the task
-- text - the task information
-- order - Position in which task is displayed in list
+For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
